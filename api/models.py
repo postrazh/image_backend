@@ -19,7 +19,7 @@ class Car(models.Model):
                                format='JPEG',
                                options={'quality': 88})
     image_mobile = ImageSpecField(source='image_file',
-                                  processors=[ResizeToFit(width=480)],
+                                  processors=[ResizeToFit(width=320)],
                                   format='JPEG',
                                   options={'quality': 84})
 

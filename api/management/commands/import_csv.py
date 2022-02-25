@@ -35,7 +35,6 @@ class Command(BaseCommand):
                                      image_url=row.get('image'))
 
             print(f'----- Saving: {car} -----')
-
             car.get_image()
             car.save()
 
