@@ -72,7 +72,6 @@ curl --location --request GET 'http://127.0.0.1:8000/api/cars/mobile/'
    * valid URL of item image but invalid image content.
 4. Support multiple working environments(development/staging/production).
    * Split the settings for each environment.
-   * Use `.env` file for extracting out the sensitive information.
    * Use `docker-compose` for production deployment.
 
 # Future roadmap
@@ -80,3 +79,6 @@ curl --location --request GET 'http://127.0.0.1:8000/api/cars/mobile/'
 * Use K8 for scaling the service.
 * Use celery tasks for synchronizing importing CSV URL in real time.
 * Use elastic search for better UX
+* Once bind a domain to the public IP, add SSL support
+* Use Postgres or MySQL in production environment
+* Use `.env` file for extracting out the sensitive information.
