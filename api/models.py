@@ -1,3 +1,4 @@
+import mimetypes
 import os.path
 from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
@@ -29,25 +30,26 @@ class Car(models.Model):
 
         try:
             # Request the image URL
-            resp = urlopen(self.image_url)
+            response = urlopen(self.image_url)
 
             # Check the response code
-            if resp.status != 200:
+            if response.status != 200:
                 print(f'Response is unsuccessful: {self.image_url}')
                 return False
 
             # Check the content type is image
-            content_type = resp.headers.get_content_type()
+            content_type = response.headers['content-type']
+            extension = mimetypes.guess_extension(content_type)
             if not content_type.startswith('image'):
                 print(f'Invalid image: {self.image_url}')
                 return False
 
             # Save the response to file
-            content = resp.read()
+            content = response.read()
             img_temp = NamedTemporaryFile(delete=True)
             img_temp.write(content)
             img_temp.flush()
-            self.image_file.save(f"image_{self.pk}", File(img_temp))
+            self.image_file.save(f"image_{self.pk}{extension}", File(img_temp))
             print(f'Successfully saved: {self.image_url}')
             return True
         except Exception:

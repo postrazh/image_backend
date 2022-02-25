@@ -6,4 +6,4 @@ from api.models import Car
 class CarSerializer(ModelSerializer):
     class Meta:
         model = Car
-        fields = ['id', 'image', 'title', 'description']
+        fields = ['id', 'title', 'description', 'image_file']
