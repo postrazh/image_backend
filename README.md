@@ -62,3 +62,21 @@ curl --location --request GET 'http://127.0.0.1:8000/api/cars/web/'
 ```shell
 curl --location --request GET 'http://127.0.0.1:8000/api/cars/mobile/'
 ```
+
+# Design Considerations
+1. To optimize the performance, CSV file needs to be imported earlier before REST API is requested.
+2. For image caching, `imagekit`'s [default caching backend](https://django-imagekit.readthedocs.io/en/latest/caching.html) is used.
+3. Various exceptions are handled properly especially when importing the csv file. Exception handling covers
+   * invalid URL of the CSV file and failure of requesting it.
+   * invalid URL of item images and failure of them.
+   * valid URL of item image but invalid image content.
+4. Support multiple working environments(development/staging/production).
+   * Split the settings for each environment.
+   * Use `.env` file for extracting out the sensitive information.
+   * Use `docker-compose` for production deployment.
+
+# Future roadmap
+* Use AWS S3 backend and cloundfront domain in production deployment
+* Use K8 for scaling the service.
+* Use celery tasks for synchronizing importing CSV URL in real time.
+* Use elastic search for better UX
