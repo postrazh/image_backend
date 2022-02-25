@@ -1,9 +1,10 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.views.generic import RedirectView
 
-from api.views import CarList
+from api.views import CarListView
 
 urlpatterns = [
     path('', RedirectView.as_view(url='cars/', permanent=False)),
-    path('cars/', CarList.as_view()),
+    re_path('cars/$', CarListView.as_view()),
+    re_path('cars/(?P<platform>.+)/$', CarListView.as_view()),
 ]
