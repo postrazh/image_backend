@@ -7,6 +7,7 @@ cd path/to/image_backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+cp .env.sample .env
 ```
 
 # Migrate database
@@ -82,3 +83,4 @@ curl --location --request GET 'http://127.0.0.1:8000/api/cars/mobile/'
 * Once bind a domain to the public IP, add SSL support
 * Use Postgres or MySQL in production environment
 * Use `.env` file for extracting out the sensitive information.
+* Use multi-stage Docker build to slim down the docker image size
